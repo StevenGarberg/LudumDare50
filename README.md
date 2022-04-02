@@ -6,6 +6,7 @@ Game jam project for [Ludum Dare 50 - "Delay the inevitable"](https://ldjam.com/
 - [@reevest2](https://github.com/reevest2)
 - [@takhomasac](https://github.com/takhomasac)
 - [@christopherplummer](https://github.com/christopherplummer)
+- [@johnbrooks92](https://github.com/johnbrooks92)
 
 ---
 
