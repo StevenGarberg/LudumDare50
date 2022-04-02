@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DefaultNamespace.Utilities
+namespace LudumDare50.Utilities
 {
     public static class ColorRandomizer
     {
