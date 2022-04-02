@@ -15,11 +15,11 @@ namespace LudumDare50.Controllers
 
         private void Update()
         {
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 // TODO: Move left
             }
-            else if (Input.GetKey(KeyCode.R))
+            else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 // TODO: Move right
             }
