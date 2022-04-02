@@ -7,7 +7,9 @@ namespace LudumDare50.Controllers
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private float _movementForce = 10.0f;
+        [SerializeField] private float _upwardForcePWRUP;
         private Rigidbody2D _rigidbody2D;
+        private const string StopFallPWRUP = "BoxPWRUP";
 
         private void Awake()
         {
@@ -23,6 +25,14 @@ namespace LudumDare50.Controllers
             else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
                 _rigidbody2D.AddForce(Vector2.right * Time.deltaTime * _movementForce, ForceMode2D.Impulse);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D powerUpTag)
+        {
+            if(powerUpTag.CompareTag(StopFallPWRUP))
+            {
+               _rigidbody2D.AddForce(Vector2.up * _upwardForcePWRUP); 
             }
         }
     }
