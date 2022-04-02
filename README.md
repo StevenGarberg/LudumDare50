@@ -1,5 +1,5 @@
 # LudumDare50
-Game jam project for [Ludum Dare 50](https://ldjam.com/events/ludum-dare/50).
+Game jam project for [Ludum Dare 50 - "Delay the inevitable"](https://ldjam.com/events/ludum-dare/50).
 
 ## Members
 - [@StevenGarberg](https://github.com/StevenGarberg)
