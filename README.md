@@ -1,7 +1,7 @@
 # LudumDare50, AKA Out of Air
 Game jam project for [Ludum Dare 50 - "Delay the inevitable"](https://ldjam.com/events/ludum-dare/50).
 
-Our Ludum Dare entry Out of Air is an arcade-like physics sim in 0G where you're in a race against the clock to collect air canisters as fast as possible before your air runs out.
+Our Ludum Dare entry [Out of Air](https://ldjam.com/events/ludum-dare/50/out-of-air) is an arcade-like physics sim in 0G where you're in a race against the clock to collect air canisters as fast as possible before your air runs out.
 
 ## Projects
 ### Game (Client)
