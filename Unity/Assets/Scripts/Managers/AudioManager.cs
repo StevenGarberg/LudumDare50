@@ -26,7 +26,11 @@ namespace LudumDare50.Unity.Managers
             {
                 foreach (var audioClip in audioClips)
                 {
-                    _audioClipDictionary.Add(audioClip.name, audioClip);
+                    if (!_audioClipDictionary.TryGetValue(audioClip.name, out _))
+                    {
+                        _audioClipDictionary.Add(audioClip.name, audioClip);
+                    }
+                    
                 }
             }
         }

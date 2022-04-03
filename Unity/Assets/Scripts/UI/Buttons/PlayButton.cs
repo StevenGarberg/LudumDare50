@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using LudumDare50.Unity.Managers;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ namespace DefaultNamespace.UI.Buttons
         {
             GetComponent<Button>().onClick.AddListener(() =>
             {
+                AudioManager.Instance.Play("select");
                 SceneManager.LoadScene("Minigame");
             });
         }

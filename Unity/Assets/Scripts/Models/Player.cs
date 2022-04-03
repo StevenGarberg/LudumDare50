@@ -12,6 +12,10 @@ namespace LudumDare50.Models
         public void AddAir()
         {
             CurrentAir += 250;
+            
+            if (CurrentAir > 1000)
+                CurrentAir = 1000;
+            
             OnAddAir?.Invoke();
         }
     }

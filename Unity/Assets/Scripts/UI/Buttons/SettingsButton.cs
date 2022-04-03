@@ -1,4 +1,5 @@
 ﻿using System;
+using LudumDare50.Unity.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ namespace DefaultNamespace.UI.Buttons
         {
             GetComponent<Button>().onClick.AddListener(() =>
             {
-                throw new NotImplementedException();
+                AudioManager.Instance.Play("select");
             });
         }
     }

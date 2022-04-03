@@ -11,8 +11,9 @@ namespace LudumDare50.Behaviours
             if (col.gameObject.CompareTag("Player"))
             {
                 // TODO: Play sound
+                AudioManager.Instance.Play("Pickup");
                 PlayerManager.Instance.Player.AddAir();
-                Destroy(gameObject);
+                gameObject.SetActive(false);
                 // TODO: Tell game to spawn another
             }
         }
