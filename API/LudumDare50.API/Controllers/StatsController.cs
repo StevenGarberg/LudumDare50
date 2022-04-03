@@ -16,6 +16,33 @@ public class StatsController : ControllerBase
         _repository = repository;
     }
     
+    [HttpGet("~/stats")]
+    [SwaggerResponse(StatusCodes.Status200OK, null, typeof(Stats))]
+    [SwaggerResponse(StatusCodes.Status400BadRequest)]
+    [SwaggerResponse(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Get()
+    {
+        return Ok(await _repository.GetAll());
+    }
+    
+    [HttpGet]
+    [SwaggerResponse(StatusCodes.Status200OK, null, typeof(List<Stats>))]
+    [SwaggerResponse(StatusCodes.Status400BadRequest)]
+    [SwaggerResponse(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetByClientId([FromRoute] string clientId)
+    {
+        return Ok(await _repository.GetByOwnerId(clientId));
+    }
+    
+    [HttpGet("~/games/{gameName}/stats")]
+    [SwaggerResponse(StatusCodes.Status200OK, null, typeof(List<Stats>))]
+    [SwaggerResponse(StatusCodes.Status400BadRequest)]
+    [SwaggerResponse(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetByGameName([FromRoute] string gameName)
+    {
+        return Ok(await _repository.GetByGameName(gameName));
+    }
+    
     [HttpGet("{id}")]
     [SwaggerResponse(StatusCodes.Status200OK, null, typeof(Stats))]
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
@@ -24,7 +51,7 @@ public class StatsController : ControllerBase
     {
         return Ok(await _repository.GetById(id));
     }
-        
+
     [HttpPost]
     [SwaggerResponse(StatusCodes.Status201Created, null, typeof(Stats))]
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
@@ -40,9 +67,12 @@ public class StatsController : ControllerBase
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
     [SwaggerResponse(StatusCodes.Status404NotFound)]
     [SwaggerResponse(StatusCodes.Status422UnprocessableEntity)]
-    public async Task<IActionResult> Update([FromRoute] string id, Stats request)
+    public async Task<IActionResult> Update([FromRoute] string gameName, [FromRoute] string cliendId, [FromRoute] string id, Stats request)
     {
-        return Ok(await _repository.Update(id, request));
+        request.Id = id;
+        request.OwnerId = cliendId;
+        request.GameName = gameName;
+        return Ok(await _repository.Update(id, new Stats(request)));
     }
 
     [HttpDelete("{id}")]

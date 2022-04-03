@@ -15,4 +15,13 @@ public class Stats : BaseResource
         Version = 1;
         //TODO: Map incoming request stats to constructed stats
     }
+    
+    public Stats(Stats request)
+    {
+        Id = request.Id;
+        OwnerId = request.OwnerId;
+        GameName = request.GameName;
+        Version += 1;
+        //TODO: Map incoming request stats to constructed stats
+    }
 }
