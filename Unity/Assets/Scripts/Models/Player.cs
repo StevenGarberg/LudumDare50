@@ -1,22 +1,24 @@
-﻿using System;
-
-namespace LudumDare50.Models
+﻿namespace LudumDare50.Models
 {
     public class Player
     {
         public int CurrentAir { get; private set; } = 1000;
         public string CurrentAirString => $"{CurrentAir / 10}%";
 
-        public event Action OnAddAir;
-        
         public void AddAir()
         {
-            CurrentAir += 250;
+            CurrentAir += 100;
             
             if (CurrentAir > 1000)
                 CurrentAir = 1000;
+        }
+
+        public void RemoveAir()
+        {
+            CurrentAir--;
             
-            OnAddAir?.Invoke();
+            if (CurrentAir < 0)
+                CurrentAir = 0;
         }
     }
 }

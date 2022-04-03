@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace LudumDare50.Controllers
 {
@@ -8,12 +7,10 @@ namespace LudumDare50.Controllers
     {
         [SerializeField] private float _movementForce = 10.0f;
         private Rigidbody2D _rigidbody2D;
-        private Transform _transform;
 
         private void Awake()
         {
             _rigidbody2D = GetComponent<Rigidbody2D>();
-            _transform = GetComponent<Transform>();
         }
 
         private void Update()
