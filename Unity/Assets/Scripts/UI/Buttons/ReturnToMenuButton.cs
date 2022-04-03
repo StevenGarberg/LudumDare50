@@ -12,6 +12,8 @@ namespace DefaultNamespace.UI.Buttons
         {
             GetComponent<Button>().onClick.AddListener(() =>
             {
+                Time.timeScale = 1;
+                
                 AudioManager.Instance.Play("select");
                 Invoke(nameof(LoadMenu), 0.25f);
 

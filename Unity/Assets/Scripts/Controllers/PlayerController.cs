@@ -10,6 +10,8 @@ namespace LudumDare50.Controllers
         [SerializeField] private float _movementForce = 10.0f;
         private Rigidbody2D _rigidbody2D;
         private bool _isMoving = false;
+
+        [SerializeField] private GameObject _pauseMenu;
         
         private void Awake()
         {
@@ -23,7 +25,13 @@ namespace LudumDare50.Controllers
 
         private void Update()
         {
-            if (GameController.Instance.IsGameOver)
+            if (GameController.Instance != null && _pauseMenu != null && Input.GetKeyDown(KeyCode.Escape))
+            {
+                AudioManager.Instance.Play("space-menu");
+                _pauseMenu.SetActive(!_pauseMenu.activeSelf);
+            }
+            
+            if (GameController.Instance != null && GameController.Instance.IsGameOver)
             {
                 if (_isMoving)
                     _isMoving = false;

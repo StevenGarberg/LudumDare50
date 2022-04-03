@@ -18,12 +18,12 @@ namespace LudumDare50.Unity.Managers
         
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
-            else
-                Destroy(this);
-            
-            DontDestroyOnLoad(gameObject);
+            Instance = this;
+        }
+
+        private void OnDestroy()
+        {
+            Instance = null;
         }
 
         private void Start()
@@ -41,7 +41,7 @@ namespace LudumDare50.Unity.Managers
         {
             while (Player.CurrentAir > 0)
             {
-                yield return new WaitForSeconds(0.005f);
+                yield return new WaitForSeconds(0.05f);
                 Player.RemoveAir();
                 UpdateUI();
             }
