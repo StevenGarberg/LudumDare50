@@ -8,6 +8,9 @@ TagManager:
   - TempPlatformPWRUP
   - BubblePWRUP
   - SpringPWRUP
+  - AnvilObstacle
+  - Obstacle2
+  - HeavyWeight
   layers:
   - Default
   - TransparentFX
