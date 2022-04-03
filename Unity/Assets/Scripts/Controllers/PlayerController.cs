@@ -10,6 +10,7 @@ namespace LudumDare50.Controllers
         [SerializeField] private float _upwardForcePWRUP;
         private Rigidbody2D _rigidbody2D;
         private const string StopFallPWRUP = "BoxPWRUP";
+        private const string TemporaryPlatformPWRUP = "TempPlatformPWRUP";
 
         private void Awake()
         {
@@ -33,6 +34,11 @@ namespace LudumDare50.Controllers
             if(powerUpTag.CompareTag(StopFallPWRUP))
             {
                _rigidbody2D.AddForce(Vector2.up * _upwardForcePWRUP); 
+               Destroy(powerUpTag.gameObject, .5f * Time.deltaTime);
+            }
+            else if(powerUpTag.CompareTag(TemporaryPlatformPWRUP))
+            {
+                _rigidbody2D.isKinematic = true;
             }
         }
     }
