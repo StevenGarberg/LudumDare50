@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 namespace LudumDare50.Controllers
@@ -15,6 +15,8 @@ namespace LudumDare50.Controllers
         private const string StopFallPWRUP = "BoxPWRUP";
         private const string SlowFallPWRUP = "BubblePWRUP";
         private const string TemporaryPlatformPWRUP = "TempPlatformPWRUP";
+        private const string SpringPWRUP = "SpringPWRUP";
+        private const string FastFall = "AnvilObstacle";
         private bool doubleFallSpeed = false;
         private bool halfFallSpeed = false;
 
@@ -85,6 +87,13 @@ namespace LudumDare50.Controllers
                 HalfFallSpeed();
                 Destroy(powerUpTag.gameObject, powerUpDestroyDelay * Time.deltaTime);
                 Invoke("DoubleFallSpeed", fallSpeedChangeDuration * Time.deltaTime);
+            }
+            
+            if(powerUpTag.CompareTag(FastFall))
+            {
+                DoubleFallSpeed();
+                Destroy(powerUpTag.gameObject, powerUpDestroyDelay * Time.deltaTime);
+                Invoke(nameof(HalfFallSpeed), fallSpeedChangeDuration * Time.deltaTime);
             }
         }
     }
