@@ -17,6 +17,10 @@ namespace LudumDare50.Controllers
         private const string TemporaryPlatformPWRUP = "TempPlatformPWRUP";
         private const string SpringPWRUP = "SpringPWRUP";
         private const string FastFall = "AnvilObstacle";
+        private const string PushDown = "Obstacle2";
+        private const string PlusMaxFallSpeed = "HeavyWeight";
+
+        
         private bool doubleFallSpeed = false;
         private bool halfFallSpeed = false;
 
@@ -73,6 +77,11 @@ namespace LudumDare50.Controllers
             }
         }
 
+        private void ResetMaxSpeed()
+        {
+            maxFallSpeed += 50;
+        }
+
 
         private void OnTriggerEnter2D(Collider2D powerUpTag)
         {
@@ -94,6 +103,19 @@ namespace LudumDare50.Controllers
                 DoubleFallSpeed();
                 Destroy(powerUpTag.gameObject, powerUpDestroyDelay * Time.deltaTime);
                 Invoke(nameof(HalfFallSpeed), fallSpeedChangeDuration * Time.deltaTime);
+            }
+
+            if(powerUpTag.CompareTag(PushDown))
+            {
+                maxFallSpeed -= 50;
+                _rigidbody2D.AddForce(Vector2.down * Time.deltaTime * 20.0f);
+                Destroy(powerUpTag.gameObject, powerUpDestroyDelay * Time.deltaTime);
+                Invoke(nameof(ResetMaxSpeed), 50f * Time.deltaTime);
+            }
+            if(powerUpTag.CompareTag(PlusMaxFallSpeed))
+            {
+                maxFallSpeed -= 4;
+                Destroy(powerUpTag.gameObject, powerUpDestroyDelay * Time.deltaTime);
             }
         }
     }
