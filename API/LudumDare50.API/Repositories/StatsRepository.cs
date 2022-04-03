@@ -19,6 +19,20 @@ public class StatsRepository : IMongoRepository<Stats>
         List<Stats> statsCollection = await GetCollection().AsQueryable().ToListAsync();
         return statsCollection;
     }
+    
+    public async Task<IEnumerable<Stats>> GetByGameName(string gameName)
+    {
+        var stats = await GetCollection().AsQueryable()
+            .Where(s => s.GameName == gameName).ToListAsync();
+        return stats;
+    }
+    
+    public async Task<IEnumerable<Stats>> GetByOwnerId(string ownerId)
+    {
+        var stats = await GetCollection().AsQueryable()
+            .Where(s => s.OwnerId == ownerId).ToListAsync();
+        return stats;
+    }
 
     public async Task<Stats> GetById(string id)
     {
