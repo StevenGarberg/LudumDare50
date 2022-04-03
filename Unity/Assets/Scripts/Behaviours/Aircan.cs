@@ -19,7 +19,7 @@ namespace LudumDare50.Behaviours
         {
             if (col.gameObject.CompareTag("Player"))
             {
-                AudioManager.Instance.Play("Pickup");
+                AudioManager.Instance.Play("space-thud");
                 PlayerManager.Instance.Player.AddAir();
                 GameController.Instance.ConsumeAndSpawn(_spawner);
                 gameObject.SetActive(false);

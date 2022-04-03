@@ -41,7 +41,7 @@ namespace LudumDare50.Unity.Managers
             var interval = 0.09f;
             while (Player.CurrentAir > 0)
             {
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(0.05f);
                 Player.RemoveAir();
                 UpdateUI();
             }
