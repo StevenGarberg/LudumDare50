@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using LudumDare50.Controllers;
 using LudumDare50.Models;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,20 +39,20 @@ namespace LudumDare50.Unity.Managers
 
         private IEnumerator BreathingRoutine()
         {
-            var interval = 0.09f;
             while (Player.CurrentAir > 0)
             {
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.005f);
                 Player.RemoveAir();
                 UpdateUI();
             }
-            // TODO: End game
+
+            GameController.Instance.GameOver();
         }
 
         private void UpdateUI()
         {
             _breathSlider.value = Player.CurrentAir / 1000f;
-            _breathPercentText.text = (Player.CurrentAir / 10).ToString() + "%";
+            _breathPercentText.text = $"{Player.CurrentAir / 10}%";
         }
     }
 }

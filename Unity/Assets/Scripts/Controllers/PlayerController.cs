@@ -23,6 +23,14 @@ namespace LudumDare50.Controllers
 
         private void Update()
         {
+            if (GameController.Instance.IsGameOver)
+            {
+                if (_isMoving)
+                    _isMoving = false;
+                
+                return;
+            }
+            
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 _rigidbody2D.AddForce(Vector2.left * Time.deltaTime * _movementForce, ForceMode2D.Impulse);

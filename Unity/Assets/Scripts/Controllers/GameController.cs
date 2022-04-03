@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using LudumDare50.Behaviours;
+using LudumDare50.Unity.Managers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,9 +13,13 @@ namespace LudumDare50.Controllers
         public static GameController Instance;
         
         [SerializeField] private int _spawnCount = 10;
+        [SerializeField] private GameObject _gameOverWindow;
         
         private Spawner[] _spawners = Array.Empty<Spawner>();
         private List<int> _activeSpawnerIndexes = new List<int>();
+
+        public bool IsGameOver { get; private set; } = false;
+        public int TimeElapsed { get; private set; } = 0;
         
         private void Awake()
         {
@@ -41,6 +47,8 @@ namespace LudumDare50.Controllers
             {
                 _spawners[index].Spawn();
             }
+
+            StartCoroutine(TimerRoutine());
         }
 
         public void ConsumeAndSpawn(Spawner spawner)
@@ -66,6 +74,22 @@ namespace LudumDare50.Controllers
                     break;
                 }
             }
+        }
+
+        private IEnumerator TimerRoutine()
+        {
+            while (!IsGameOver)
+            {
+                yield return new WaitForSeconds(1);
+                TimeElapsed++;
+            }
+        }
+
+        public void GameOver()
+        {
+            IsGameOver = true;
+            AudioManager.Instance.Play("taunt");
+            _gameOverWindow.SetActive(true);
         }
     }
 }
