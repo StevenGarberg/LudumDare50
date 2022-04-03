@@ -8,9 +8,15 @@ namespace LudumDare50.Controllers
     {
         [SerializeField] private float _movementForce = 10.0f;
         [SerializeField] private float _upwardForcePWRUP;
+        [SerializeField] private float maxFallSpeed;
+        [SerializeField] private float powerUpDestroyDelay = 1f;
+        [SerializeField] private float fallSpeedChangeDuration;
         private Rigidbody2D _rigidbody2D;
         private const string StopFallPWRUP = "BoxPWRUP";
+        private const string SlowFallPWRUP = "BubblePWRUP";
         private const string TemporaryPlatformPWRUP = "TempPlatformPWRUP";
+        private bool doubleFallSpeed = false;
+        private bool halfFallSpeed = false;
 
         private void Awake()
         {
@@ -19,6 +25,11 @@ namespace LudumDare50.Controllers
 
         private void Update()
         {
+            if(_rigidbody2D.velocity.y < maxFallSpeed)
+            {
+                _rigidbody2D.velocity = new Vector2(0, maxFallSpeed);
+            }
+
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
                 _rigidbody2D.AddForce(Vector2.left * Time.deltaTime * _movementForce, ForceMode2D.Impulse);
@@ -28,17 +39,52 @@ namespace LudumDare50.Controllers
                 _rigidbody2D.AddForce(Vector2.right * Time.deltaTime * _movementForce, ForceMode2D.Impulse);
             }
         }
+        private void DoubleFallSpeed()
+        {
+            if(halfFallSpeed)
+            {
+                halfFallSpeed = false;
+                maxFallSpeed = maxFallSpeed * 10;
+                return;
+            }
+                        
+            if(!doubleFallSpeed)
+            {
+                doubleFallSpeed = true;
+                maxFallSpeed = maxFallSpeed * 10;
+            }
+
+        }
+        private void HalfFallSpeed()
+        {
+            if(doubleFallSpeed)
+            {
+                doubleFallSpeed = false;
+                maxFallSpeed = maxFallSpeed / 10;
+                return;
+            }
+
+            if(!halfFallSpeed)
+            {
+                halfFallSpeed = true;
+                maxFallSpeed = maxFallSpeed / 10;
+            }
+        }
+
 
         private void OnTriggerEnter2D(Collider2D powerUpTag)
         {
             if(powerUpTag.CompareTag(StopFallPWRUP))
             {
                _rigidbody2D.AddForce(Vector2.up * _upwardForcePWRUP); 
-               Destroy(powerUpTag.gameObject, .5f * Time.deltaTime);
+               Destroy(powerUpTag.gameObject, powerUpDestroyDelay * Time.deltaTime);
             }
-            else if(powerUpTag.CompareTag(TemporaryPlatformPWRUP))
+
+            if(powerUpTag.CompareTag(SlowFallPWRUP))
             {
-                _rigidbody2D.isKinematic = true;
+                HalfFallSpeed();
+                Destroy(powerUpTag.gameObject, powerUpDestroyDelay * Time.deltaTime);
+                Invoke("DoubleFallSpeed", fallSpeedChangeDuration * Time.deltaTime);
             }
         }
     }

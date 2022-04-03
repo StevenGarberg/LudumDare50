@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BoxPWRUP
   - TempPlatformPWRUP
+  - BubblePWRUP
   layers:
   - Default
   - TransparentFX
