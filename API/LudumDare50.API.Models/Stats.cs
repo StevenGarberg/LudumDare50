@@ -9,9 +9,9 @@ public class Stats : BaseResource
 
     public Stats(string ownerId, string gameName, Stats request)
     {
-        this.Id = Guid.NewGuid().ToString();
-        this.OwnerId = ownerId;
-        this.GameName = gameName;
+        Id = string.IsNullOrEmpty(request.Id) ? Guid.NewGuid().ToString() : request.Id;
+        OwnerId = ownerId;
+        GameName = gameName;
         //TODO: Map incoming request stats to constructed stats
     }
 }
