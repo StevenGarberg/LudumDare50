@@ -67,12 +67,10 @@ public class StatsController : ControllerBase
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
     [SwaggerResponse(StatusCodes.Status404NotFound)]
     [SwaggerResponse(StatusCodes.Status422UnprocessableEntity)]
-    public async Task<IActionResult> Update([FromRoute] string gameName, [FromRoute] string cliendId, [FromRoute] string id, Stats request)
+    public async Task<IActionResult> Update([FromRoute] string gameName, [FromRoute] string clientId, [FromRoute] string id, Stats request)
     {
-        request.Id = id;
-        request.OwnerId = cliendId;
-        request.GameName = gameName;
-        return Ok(await _repository.Update(id, new Stats(request)));
+        var statsToUpdate = await _repository.GetById(id);
+        return Ok(await _repository.Update(id, new Stats(statsToUpdate)));
     }
 
     [HttpDelete("{id}")]

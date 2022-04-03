@@ -50,14 +50,17 @@ public class StatsRepository : IMongoRepository<Stats>
         return statsList.FirstOrDefault(x => x.Id == data.Id);
     }
 
-    public Task<Stats> Update(string id, Stats data)
+    public async Task<Stats> Update(string id, Stats data)
     {
-        throw new NotImplementedException();
+        data.UpdatedAt = DateTime.UtcNow;
+        data.Version++;
+        await GetCollection().ReplaceOneAsync(x => x.Id == id, data);
+        return data;
     }
 
-    public Task Delete(string id, bool hardDelete = false)
+    public async Task Delete(string id)
     {
-        throw new NotImplementedException();
+        await GetCollection().DeleteOneAsync(x => x.Id == id);
     }
     
     private IMongoCollection<Stats> GetCollection()
