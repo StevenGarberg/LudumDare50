@@ -1,6 +1,7 @@
 ﻿using LudumDare50.API.Models;
 using LudumDare50.API.Repositories.Interfaces;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 
 namespace LudumDare50.API.Repositories;
 
@@ -13,19 +14,26 @@ public class StatsRepository : IMongoRepository<Stats>
         _mongoClient = mongoClient;
     }
 
-    public Task<IEnumerable<Stats>> GetAll()
+    public async Task<IEnumerable<Stats>> GetAll()
     {
-        throw new NotImplementedException();
+        List<Stats> statsCollection = await GetCollection().AsQueryable().ToListAsync();
+        return statsCollection;
     }
 
-    public Task<Stats> GetById(string id)
+    public async Task<Stats> GetById(string id)
     {
-        throw new NotImplementedException();
+        var stats = await GetCollection().AsQueryable()
+            .FirstOrDefaultAsync(s => s.Id == id);
+        return stats;
     }
 
-    public Task<Stats> Create(Stats data)
+    public async Task<Stats> Create(Stats data)
     {
-        throw new NotImplementedException();
+        data.CreatedAt = DateTime.UtcNow;
+        data.UpdatedAt = DateTime.UtcNow;
+        await GetCollection().InsertOneAsync(data);
+        var statsList = await GetCollection().AsQueryable().ToListAsync();
+        return statsList.FirstOrDefault(x => x.Id == data.Id);
     }
 
     public Task<Stats> Update(string id, Stats data)
@@ -40,7 +48,7 @@ public class StatsRepository : IMongoRepository<Stats>
     
     private IMongoCollection<Stats> GetCollection()
     {
-        IMongoDatabase database = _mongoClient.GetDatabase("LudumDare50 ");
+        IMongoDatabase database = _mongoClient.GetDatabase("LudumDare50");
         IMongoCollection<Stats> collection = database.GetCollection<Stats>("Stats");
         return collection;
     }
