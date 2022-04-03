@@ -12,9 +12,10 @@ Game jam project for [Ludum Dare 50 - "Delay the inevitable"](https://ldjam.com/
 
 ## Tools
 ### Game
-- Unity
-- Aseprite
-- Adobe Audition
+- **Unity** | Game Engine
+- **Aseprite** | Pixel Art
+- **jsfxr** | Sound Effects
+- **GarageBand** | Music & Ambient Noise
 
 ## Unity Packages Used
 - JSON .NET For Unity | [Asset Store](https://assetstore.unity.com/packages/tools/input-management/json-net-for-unity-11347)
