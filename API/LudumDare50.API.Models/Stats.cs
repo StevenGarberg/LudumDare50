@@ -21,7 +21,7 @@ public class Stats : BaseResource
         Id = request.Id;
         OwnerId = request.OwnerId;
         GameName = request.GameName;
-        Version += 1;
+        Version = request.Version;
         //TODO: Map incoming request stats to constructed stats
     }
 }
