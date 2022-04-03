@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class PowerUpController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Rigidbody2D rigidBodyPWRUP;
+    SpringJoint2D springJoint2D;
+    private void Awake()
     {
-        
+        rigidBodyPWRUP = GetComponent<Rigidbody2D>();
+        springJoint2D = GetComponent<SpringJoint2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D tag)
     {
-        
+        if (tag.CompareTag("Player"))
+        {
+           Invoke(nameof(EnableSpringJoint), 50f * Time.deltaTime);
+           Invoke(nameof(DisableSpringJoint), 150f * Time.deltaTime);
+        }   
+    }
+
+    private void EnableSpringJoint()
+    {
+        springJoint2D.enabled = true;
+    }
+    private void DisableSpringJoint(){
+        springJoint2D.enabled = false;
     }
 }
