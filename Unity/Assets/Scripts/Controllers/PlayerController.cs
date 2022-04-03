@@ -20,11 +20,19 @@ namespace LudumDare50.Controllers
         {
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
             {
-                _transform.Translate(Vector2.left * Time.deltaTime * _movementForce);
+                _rigidbody2D.AddForce(Vector2.left * Time.deltaTime * _movementForce, ForceMode2D.Impulse);
             }
             else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
             {
-                _transform.Translate(Vector2.right * Time.deltaTime * _movementForce);
+                _rigidbody2D.AddForce(Vector2.right * Time.deltaTime * _movementForce, ForceMode2D.Impulse);
+            }
+            else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+            {
+                _rigidbody2D.AddForce(Vector2.up * Time.deltaTime * _movementForce, ForceMode2D.Impulse);
+            }
+            else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+            {
+                _rigidbody2D.AddForce(Vector2.down * Time.deltaTime * _movementForce, ForceMode2D.Impulse);
             }
         }
     }
