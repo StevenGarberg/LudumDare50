@@ -569,7 +569,21 @@ PlayerSettings:
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
   webGLDecompressionFallback: 0
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    1: CT_TPS
+    4: CT_TPS
+    7: CT_TPS
+    13: CT_TPS
+    14: CT_TPS
+    19: CT_TPS
+    21: CT_TPS
+    25: CT_TPS
+    27: CT_TPS
+    28: CT_TPS
+    29: CT_TPS
+    30: CT_TPS
+    32: CT_TPS
+    33: CT_TPS
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
