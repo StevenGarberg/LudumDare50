@@ -5,6 +5,7 @@ Our Ludum Dare entry [Out of Air](https://ldjam.com/events/ludum-dare/50/out-of-
 
 ## Projects
 ### Game (Client)
+- [WebGL](https://stevengarberg.itch.io/out-of-air) - Unity 2021
 - [Windows EXE](https://drive.google.com/file/d/1aPa5SiZWS540hAZUSkQZBmefuCHQtVun/view) - Unity 2021
 
 ### Back-end (Server)
@@ -31,6 +32,7 @@ Our Ludum Dare entry [Out of Air](https://ldjam.com/events/ludum-dare/50/out-of-
 - .NET 6 Web API
 - MongoDB
 - Microsoft Azure
+- itch.io
 
 ## Unity Packages Used
 - RestClient | [Asset Store](https://assetstore.unity.com/packages/tools/network/rest-client-for-unity-102501) | [GitHub](https://github.com/proyecto26/RestClient)
