@@ -53,13 +53,13 @@ namespace LudumDare50.Unity.Managers
             }
             Stats = new Stats();
         }
-
+        
         public void Save()
         {
             SaveLocal();
             try
             {
-                //SaveRemote();
+                SaveRemote();
             }
             catch
             {

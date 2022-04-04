@@ -20,7 +20,7 @@ namespace DefaultNamespace.UI.Windows
                              + $"<b>Most Cans Collected:</b> {stats.MostCansCollected}";
         }
 
-        private string TimeToString(int time)
+        private static string TimeToString(int time)
         {
             var hours = time / 3600;
             var minutes = time / 60;
