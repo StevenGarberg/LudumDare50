@@ -4073,8 +4073,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 5bf492531f251984aa9dbd3c46904d33, type: 3}
-    m_FontSize: 72
+    m_Font: {fileID: 12800000, guid: a0e2c17a3d361f543bb423593695f222, type: 3}
+    m_FontSize: 96
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 7
