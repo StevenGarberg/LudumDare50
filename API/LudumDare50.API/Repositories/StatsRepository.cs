@@ -26,13 +26,6 @@ public class StatsRepository : IMongoRepository<Stats>
             .Where(s => s.GameName == gameName).ToListAsync();
         return stats;
     }
-    
-    public async Task<IEnumerable<Stats>> GetByOwnerId(string ownerId)
-    {
-        var stats = await GetCollection().AsQueryable()
-            .Where(s => s.OwnerId == ownerId).ToListAsync();
-        return stats;
-    }
 
     public async Task<Stats> GetById(string id)
     {
@@ -44,7 +37,7 @@ public class StatsRepository : IMongoRepository<Stats>
     public async Task<Stats> Create(Stats data)
     {
         data.CreatedAt = DateTime.UtcNow;
-        data.UpdatedAt = DateTime.UtcNow;
+        data.UpdatedAt = data.CreatedAt;
         await GetCollection().InsertOneAsync(data);
         var statsList = await GetCollection().AsQueryable().ToListAsync();
         return statsList.FirstOrDefault(x => x.Id == data.Id);

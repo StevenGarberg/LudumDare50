@@ -24,16 +24,7 @@ public class StatsController : ControllerBase
     {
         return Ok(await _repository.GetAll());
     }
-    
-    [HttpGet]
-    [SwaggerResponse(StatusCodes.Status200OK, null, typeof(List<Stats>))]
-    [SwaggerResponse(StatusCodes.Status400BadRequest)]
-    [SwaggerResponse(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetByClientId([FromRoute] string clientId)
-    {
-        return Ok(await _repository.GetByOwnerId(clientId));
-    }
-    
+
     [HttpGet("~/games/{gameName}/stats")]
     [SwaggerResponse(StatusCodes.Status200OK, null, typeof(List<Stats>))]
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
@@ -43,43 +34,42 @@ public class StatsController : ControllerBase
         return Ok(await _repository.GetByGameName(gameName));
     }
     
-    [HttpGet("{id}")]
+    [HttpGet]
     [SwaggerResponse(StatusCodes.Status200OK, null, typeof(Stats))]
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
     [SwaggerResponse(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById([FromRoute] string id)
+    public async Task<IActionResult> GetByClientId([FromRoute] string clientId)
     {
-        return Ok(await _repository.GetById(id));
+        return Ok(await _repository.GetById(clientId));
     }
 
-    [HttpPost]
+    [HttpPut]
+    [SwaggerResponse(StatusCodes.Status200OK, null, typeof(Stats))]
     [SwaggerResponse(StatusCodes.Status201Created, null, typeof(Stats))]
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
     [SwaggerResponse(StatusCodes.Status422UnprocessableEntity)]
-    public async Task<IActionResult> Create([FromRoute] string gameName, [FromRoute] string clientId, Stats request)
+    public async Task<IActionResult> Upsert([FromRoute] string gameName, [FromRoute] string clientId, Stats request)
     {
-        var stats = new Stats(gameName, clientId, request);
-        return Created($"/games/{gameName}/client/{clientId}/stats/{stats.Id}", await _repository.Create(stats));
+        var statsToUpdate = await _repository.GetById(clientId);
+        if (statsToUpdate == null)
+        {
+            var newStats = new Stats(gameName, clientId, request);
+            return Created($"/games/{gameName}/client/{clientId}/stats", await _repository.Create(newStats));
+        }
+
+        statsToUpdate.GameName = gameName;
+        statsToUpdate.Id = clientId;
+        var stats = new Stats(statsToUpdate);
+        return Ok(await _repository.Update(clientId, stats));
     }
 
-    [HttpPut("{id}")]
-    [SwaggerResponse(StatusCodes.Status200OK, null, typeof(Stats))]
-    [SwaggerResponse(StatusCodes.Status400BadRequest)]
-    [SwaggerResponse(StatusCodes.Status404NotFound)]
-    [SwaggerResponse(StatusCodes.Status422UnprocessableEntity)]
-    public async Task<IActionResult> Update([FromRoute] string gameName, [FromRoute] string clientId, [FromRoute] string id, Stats request)
-    {
-        var statsToUpdate = await _repository.GetById(id);
-        return Ok(await _repository.Update(id, new Stats(statsToUpdate)));
-    }
-
-    [HttpDelete("{id}")]
+    [HttpDelete]
     [SwaggerResponse(StatusCodes.Status204NoContent)]
     [SwaggerResponse(StatusCodes.Status400BadRequest)]
     [SwaggerResponse(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete([FromRoute] string id)
+    public async Task<IActionResult> Delete([FromRoute] string clientId)
     {
-        await _repository.Delete(id);
+        await _repository.Delete(clientId);
         return NoContent();
     }
 }
