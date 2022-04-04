@@ -4,24 +4,36 @@ namespace LudumDare50.API.Models;
 
 public class Stats : BaseResource
 {
-    public string GameName { get; set; }
+    public int TimePlayed { get; set; }
+    public int RoundsPlayed { get; set; }
+    public int LongestRound { get; set; }
+    public int MostCansCollected { get; set; }
+    public int CansCollected { get; set; }
+    
     public Stats() {}
 
-    public Stats(string gameName, string ownerId, Stats request)
+    public Stats(string gameName, string clientId, Stats request)
     {
-        Id = string.IsNullOrEmpty(request.Id) ? Guid.NewGuid().ToString() : request.Id;
-        OwnerId = ownerId;
+        Id = clientId;
         GameName = gameName;
         Version = 1;
-        //TODO: Map incoming request stats to constructed stats
+        TimePlayed = request.TimePlayed;
+        RoundsPlayed = request.RoundsPlayed;
+        LongestRound = request.LongestRound;
+        MostCansCollected = request.MostCansCollected;
+        CansCollected = request.CansCollected;
     }
     
     public Stats(Stats request)
     {
         Id = request.Id;
-        OwnerId = request.OwnerId;
         GameName = request.GameName;
         Version = request.Version;
-        //TODO: Map incoming request stats to constructed stats
+        CreatedAt = request.CreatedAt;
+        TimePlayed = request.TimePlayed;
+        RoundsPlayed = request.RoundsPlayed;
+        LongestRound = request.LongestRound;
+        MostCansCollected = request.MostCansCollected;
+        CansCollected = request.CansCollected;
     }
 }
