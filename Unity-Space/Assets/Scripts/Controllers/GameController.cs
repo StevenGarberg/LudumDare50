@@ -106,5 +106,21 @@ namespace LudumDare50.Controllers
             }
             StatsManager.Instance.Save();
         }
+
+        public void Quit()
+        {
+            StatsManager.Instance.Stats.TimePlayed += TimeElapsed;
+            StatsManager.Instance.Stats.RoundsPlayed++;
+            StatsManager.Instance.Stats.CansCollected += _cansConsumed;
+            if (TimeElapsed > StatsManager.Instance.Stats.LongestRound)
+            {
+                StatsManager.Instance.Stats.LongestRound = TimeElapsed;
+            }
+            if (_cansConsumed > StatsManager.Instance.Stats.MostCansCollected)
+            {
+                StatsManager.Instance.Stats.MostCansCollected = _cansConsumed;
+            }
+            StatsManager.Instance.Save();
+        }
     }
 }

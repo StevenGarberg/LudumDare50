@@ -24,10 +24,7 @@ namespace LudumDare50.Unity.Managers
                 Destroy(this);
             
             DontDestroyOnLoad(gameObject);
-        }
-
-        private void Start()
-        {
+            
             LoadLocal();
         }
 

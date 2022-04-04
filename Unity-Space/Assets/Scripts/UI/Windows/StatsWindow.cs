@@ -3,7 +3,7 @@ using LudumDare50.Unity.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultNamespace.UI.Windows
+namespace LudumDare50.UI.Windows
 {
     public class StatsWindow : MonoBehaviour
     {

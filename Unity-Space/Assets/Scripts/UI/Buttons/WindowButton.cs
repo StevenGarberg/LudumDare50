@@ -2,19 +2,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DefaultNamespace.UI.Buttons
+namespace LudumDare50.UI.Buttons
 {
     [RequireComponent(typeof(Button))]
-    public class CreditsButton : MonoBehaviour
+    public class WindowButton : MonoBehaviour
     {
-        [SerializeField] private GameObject _creditsWindow;
+        [SerializeField] private GameObject _window;
         
         private void Start()
         {
             GetComponent<Button>().onClick.AddListener(() =>
             {
                 AudioManager.Instance.Play("select");
-                _creditsWindow.SetActive(true);
+                _window.SetActive(true);
             });
         }
     }
