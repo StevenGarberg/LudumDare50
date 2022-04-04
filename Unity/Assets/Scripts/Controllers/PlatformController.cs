@@ -15,8 +15,8 @@ Rigidbody2D platformRigidBody;
     {
         if (Collision.gameObject.tag.Equals("Player"))
         {
-            Invoke("PlatformFall", 5f * Time.deltaTime);
-            Destroy (gameObject, 50f * Time.deltaTime);
+            Invoke("PlatformFall", 50f * Time.deltaTime);
+            Destroy (gameObject, 150f * Time.deltaTime);
         }
     }
 
