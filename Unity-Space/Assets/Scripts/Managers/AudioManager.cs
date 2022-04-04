@@ -30,14 +30,12 @@ namespace LudumDare50.Unity.Managers
                     {
                         _audioClipDictionary.Add(audioClip.name, audioClip);
                     }
-                    
                 }
             }
         }
 
         public void Play(string clipName)
         {
-            Debug.Log("Attempting to play " + clipName);
             if (_audioClipDictionary.TryGetValue(clipName, out var clip))
             {
                 var spawnedObj = Instantiate(_audioObjectPrefab);

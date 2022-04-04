@@ -1,4 +1,5 @@
-﻿using LudumDare50.Unity.Managers;
+﻿using LudumDare50.Controllers;
+using LudumDare50.Unity.Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ namespace DefaultNamespace.UI.Buttons
                 Time.timeScale = 1;
                 
                 AudioManager.Instance.Play("select");
+                GameController.Instance.Quit();
+                
                 Invoke(nameof(LoadMenu), 0.25f);
 
             });

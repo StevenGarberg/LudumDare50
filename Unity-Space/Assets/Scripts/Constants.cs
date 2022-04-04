@@ -1,4 +1,4 @@
-﻿namespace DefaultNamespace
+﻿namespace LudumDare50
 {
     public class Constants
     {

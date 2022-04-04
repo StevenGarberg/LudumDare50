@@ -17,7 +17,8 @@ namespace LudumDare50.Controllers
         
         private Spawner[] _spawners = Array.Empty<Spawner>();
         private List<int> _activeSpawnerIndexes = new List<int>();
-
+        private int _cansConsumed = 0;
+        
         public bool IsGameOver { get; private set; } = false;
         public int TimeElapsed { get; private set; } = 0;
         
@@ -53,6 +54,7 @@ namespace LudumDare50.Controllers
 
         public void ConsumeAndSpawn(Spawner spawner)
         {
+            _cansConsumed++;
             for (var i = 0; i < _spawnCount; i++)
             {
                 var index = _activeSpawnerIndexes[i];
@@ -90,6 +92,35 @@ namespace LudumDare50.Controllers
             IsGameOver = true;
             AudioManager.Instance.Play("taunt");
             _gameOverWindow.SetActive(true);
+
+            StatsManager.Instance.Stats.TimePlayed += TimeElapsed;
+            StatsManager.Instance.Stats.RoundsPlayed++;
+            StatsManager.Instance.Stats.CansCollected += _cansConsumed;
+            if (TimeElapsed > StatsManager.Instance.Stats.LongestRound)
+            {
+                StatsManager.Instance.Stats.LongestRound = TimeElapsed;
+            }
+            if (_cansConsumed > StatsManager.Instance.Stats.MostCansCollected)
+            {
+                StatsManager.Instance.Stats.MostCansCollected = _cansConsumed;
+            }
+            StatsManager.Instance.Save();
+        }
+
+        public void Quit()
+        {
+            StatsManager.Instance.Stats.TimePlayed += TimeElapsed;
+            StatsManager.Instance.Stats.RoundsPlayed++;
+            StatsManager.Instance.Stats.CansCollected += _cansConsumed;
+            if (TimeElapsed > StatsManager.Instance.Stats.LongestRound)
+            {
+                StatsManager.Instance.Stats.LongestRound = TimeElapsed;
+            }
+            if (_cansConsumed > StatsManager.Instance.Stats.MostCansCollected)
+            {
+                StatsManager.Instance.Stats.MostCansCollected = _cansConsumed;
+            }
+            StatsManager.Instance.Save();
         }
     }
 }
