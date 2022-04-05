@@ -1,0 +1,33 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@if (Model?.StatsList != null && Model.StatsList.Any())
+{
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th>ID</th>
+            <th>Game</th>
+            <th>Last Played At</th>
+            <th>Time Played</th>
+            <th>Rounds Played</th>
+            <th>Total Cans Collected</th>
+            <th>Longest Round</th>
+            <th>Most Cans Collected</th>
+        </tr>
+        @foreach (var stats in Model.StatsList)
+        {
+            <tr>
+                <td>@stats.Id</td>
+                <td>@stats.GameName</td>
+                <td>@stats.UpdatedAt</td>
+                <td>@stats.TimePlayed</td>
+                <td>@stats.RoundsPlayed</td>
+                <td>@stats.CansCollected</td>
+                <td>@stats.LongestRound</td>
+                <td>@stats.MostCansCollected</td>
+            </tr>
+        }
+    </table>
+}
