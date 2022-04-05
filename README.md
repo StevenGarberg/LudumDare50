@@ -10,6 +10,7 @@ Our Ludum Dare entry [Out of Air](https://ldjam.com/events/ludum-dare/50/out-of-
 
 ### Back-end (Server)
 - [Web API](https://ludumdare50.azurewebsites.net/) - .NET 6 MVC
+- [Dashboard](https://ludumdare50-dashboard.azurewebsites.net/) - .NET 6 MVC
 
 ## Members
 - [@StevenGarberg](https://github.com/StevenGarberg) | Development
