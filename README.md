@@ -43,8 +43,5 @@ Our Ludum Dare entry [Out of Air](https://ldjam.com/events/ludum-dare/50/out-of-
 ---
 
 ## Screenshots
-![image](/Documentation/Images/space/gameplay.png)
-![image](/Documentation/Images/space/main-menu.png)
-![image](/Documentation/Images/space/game-over.png)
-![image](/Documentation/Images/space/pause-menu.png)
-![image](/Documentation/Images/space/map.png)
+![image](/Documentation/Images/gameplay.png)
+![image](/Documentation/Images/menu.png)
